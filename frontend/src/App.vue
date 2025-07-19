@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import '@/assets/main.css'
+
 
 </script>
 
@@ -13,15 +15,11 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav> -->
     </div>
   </header>
-  <main>
+  <main class="center">
     <RouterView />
   </main>
 </template>
 
 <style>
-*{
-  margin: 0;
-  padding: 0;
-  border-radius: 5px;
-}
+
 </style>

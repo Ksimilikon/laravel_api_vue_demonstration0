@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('token');
+            $table->enum('type', ['dialog', 'group']);
+            // $table->string('token');
             $table->timestamps();
         });
     }

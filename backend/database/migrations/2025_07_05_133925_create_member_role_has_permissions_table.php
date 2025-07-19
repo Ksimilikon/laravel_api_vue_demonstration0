@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('member_role_has_permissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(MemberRole::class);
-            $table->foreignIdFor(Permission::class);
+            $table->foreignIdFor(MemberRole::class)->constrained();
+            $table->foreignIdFor(Permission::class)->constrained();
             $table->timestamps();
         });
     }
@@ -27,7 +27,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('member_role_has_permissions', function (Blueprint $table) {
-            $table->dropForeign(['member_role_id', 'permission_id']);
+            $table->dropConstrainedForeignIdFor(MemberRole::class);
+            $table->dropConstrainedForeignIdFor(Permission::class);
         });
         Schema::dropIfExists('member_role_has_permissions');
     }

@@ -26,7 +26,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('user_has_settings', function (Blueprint $table) {
-            $table->dropForeign(['user_id', 'setting_id']);
+            $table->dropConstrainedForeignIdFor(User::class);
+            $table->dropConstrainedForeignIdFor(Setting::class);
         });
         Schema::dropIfExists('user_has_settings');
     }

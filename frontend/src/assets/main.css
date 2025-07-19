@@ -1,0 +1,110 @@
+:root{
+    --bg-main-color: #111;
+    --rounded-main: 5px;
+
+    --text-color-main: #fff;
+    --text-color-error: rgb(207, 46, 46);
+    --text-size-main: 15px;
+
+    --btn-color-base: rgb(17, 131, 131);
+    --btn-color-base-hover: rgba(13, 224, 224, 0.5); 
+    --btn-color-danger: rgb(218, 48, 48);
+    --btn-color-danger-hover: rgba(255, 0, 0, 0.5);
+}
+/* general */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  border-radius: var(--rounded-main);
+  color: var(--text-color-main);
+  font-family: 'Noto Sans', sans-serif;
+}
+body{
+  background-color: var(--bg-main-color);
+}
+input{
+  background-color: gray;
+  color: white;
+  font-size: medium;
+  padding: 5px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+input::placeholder{
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+}
+form{
+  width: 70%;
+}
+.error{
+  color: var(--text-color-error);
+}
+/* size */
+.w-full{
+  width: 100%;
+}
+
+.h-full{
+  height: 100%;
+}
+.h-screen{
+  height: 100vh;
+}
+.input-form{
+  width: 35%;
+}
+
+/* text */
+.text-white{
+  color: white;
+}
+/* buttons */
+button{
+  padding: 5px 10px;
+  border: none;
+}
+.btn-base{
+    background-color: var(--btn-color-base);
+}
+.btn-base:hover{
+    background-color: var(--btn-color-base-hover);
+}
+.btn-danger{
+    background-color: var(--btn-color-danger);
+}
+.btn-danger:hover{
+    background-color: var(--btn-color-danger-hover);
+}
+
+/* placing */
+.flex{
+  display: flex;
+}
+.frow{
+  flex-direction: row;
+}
+.fcol{
+  flex-direction: column;
+}
+.fcenter-row{
+  justify-content: center;
+}
+.fcenter-col{
+  align-items: center;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.scroll{
+  overflow-y: scroll;
+}
+/* cursor */
+.cursor-def:hover{
+  cursor: default;
+}
+.cursor-pointer:hover{
+  cursor: pointer;
+}
