@@ -1,65 +1,46 @@
 <template>
 <div class="area">
     <div class="header w-full flex fcenter-row">
-        nameChat
+        {{ chatName }}
     </div>
     <div class="messages scroll w-full">
         <div v-for="el in msg" class="flex">
             <div v-if="true" class="message-self message">
-                {{ el }}
+                {{ el.text }}
             </div>
             <div v-else class="message">
                 {{ 'opponent sdfsdlfj s fslkjfdls;ja fdl;k jflsdkjflskjdf sdlkh fldsk jflsdkj ;flsakj sl;dkjf as;ldk jfsd' }}
             </div>
         </div>
     </div>
-    <div class="input">
-        <input type="text" name="" id="">
+    <div v-show="chatId > 0" class="input">
+        <MessageInput :id-chat="chatId" />
     </div>
 </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
+import MessageInput from './messages/MessageInput.vue';
+import { useMessageStore } from '@/stores/pinia/messageStore';
 
-const msg = ref(['sadfad',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-    'sadf',
-]);
+const store = useMessageStore();
 const isSelf = ref(false);
 
+const msg = ref([]);
+msg.value = store.msgs;
+const chatId = ref(0);
+const chatName = ref('');
+
+watch(store, ()=>{
+    chatId.value = store.chatId;
+    chatName.value = store.chatName;
+    msg.value = store.msgs;
+});
 onMounted(() => {
   if (msg.value) {
     msg.value.scrollTop = msg.value.scrollHeight
   }
+  
 })
 </script>
 <style scoped>

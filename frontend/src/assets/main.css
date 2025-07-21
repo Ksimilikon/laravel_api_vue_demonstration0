@@ -30,6 +30,8 @@ input{
   padding: 5px 10px;
   width: 100%;
   box-sizing: border-box;
+  outline: none;
+  border: none;
 }
 input::placeholder{
   color: rgb(255, 255, 255);

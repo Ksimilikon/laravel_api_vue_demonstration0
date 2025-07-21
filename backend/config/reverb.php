@@ -35,6 +35,10 @@ return [
             'hostname' => env('REVERB_HOST'),
             'options' => [
                 'tls' => [],
+                'origin' => [
+                    'http://localhost:5173',
+                    'https://localhost:5173',
+                ],
             ],
             'max_request_size' => env('REVERB_MAX_REQUEST_SIZE', 10_000),
             'scaling' => [

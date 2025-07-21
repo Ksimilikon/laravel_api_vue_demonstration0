@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import '@/assets/main.css'
+import { defineStore } from 'pinia';
 
 
 </script>

@@ -57,4 +57,8 @@ class User extends Authenticatable
         return $this->hasMany(Member::class);
     }
 
+    public function getMember($idChat){
+        $member = Member::where('conversation_id', $idChat)->where('user_id', $this->id)->first();
+        return $member;
+    }
 }

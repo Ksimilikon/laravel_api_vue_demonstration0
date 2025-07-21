@@ -24,4 +24,5 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::get('/chat/{idChat}', [ConversationController::class, 'getMessages']);
     Route::get('/search-users', [UsersController::class, 'searchUsers']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('/send-message', [ConversationController::class, 'setMessage']);
 });

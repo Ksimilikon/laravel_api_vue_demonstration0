@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageUpdate;
 use App\Models\Conversation;
 use App\Models\Member;
 use App\Models\Message;
@@ -13,6 +14,27 @@ use function Laravel\Prompts\error;
 
 class ConversationController extends Controller
 {
+    public function test(){
+        
+    }
+    public function setMessage(Request $request){
+        try{
+            $validate = $request->validate([
+                'message'=>['required', 'string'],
+                'idChat'=>['required', 'integer']
+            ]);
+            $msg = Message::create([
+                'text'=>$request->message,
+                'conversation_id'=>$request->idChat,
+                'member_id'=>$request->user()->getMember($request->idChat)->id,
+            ]);
+            event(new MessageUpdate($request->idChat, $request->message));
+            return response()->json(['status'=>1]);
+        }
+        catch(Error $er){
+            return response()->json(['error'=>'error sending']);
+        }
+    }
     public function getConversations(Request $request){
         $convs_id = Member::where('user_id', $request->user()->id)->distinct()->get()->pluck('conversation_id');
         $convs = Conversation::whereIn('id', $convs_id)->get();

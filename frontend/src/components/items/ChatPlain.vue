@@ -1,11 +1,17 @@
 <template>
     <div @click="select" class="plain">
-        {{ name }}
+        {{ name }} {{ connectionStatus }}
     </div>
 </template>
 <script setup>
+import initializeEcho from '@/echo';
+
 import http from '@/http';
-import { defineStore } from 'pinia';
+import { useMessageStore } from '@/stores/pinia/messageStore';
+import { ref } from 'vue';
+
+const store = useMessageStore();
+const connectionStatus = ref('');
 
 const props = defineProps({
     id: {
@@ -19,9 +25,24 @@ const props = defineProps({
 });
 
 async function select() {
-    const response = http.get('/api/chat/'+props.id);
-    console.log(response); //передать выше по дереву в другую часть окна
-    
+    const response = await http.get('/api/chat/'+props.id);
+    console.log(response.data.messages); 
+    store.setMessages(response.data.messages, props.id, props.name);
+
+    const echo = initializeEcho();
+    (await echo).private(`Chat.${props.id}`)
+    .listen('.new-message', data => {
+      console.log('Получено событие:', data);
+    })
+    .subscribed(() => {
+      console.log('Подписка на канал выполнена');
+      connectionStatus.value = 'connected';
+    })
+    .error((error) => {
+      console.error('Ошибка подключения:', error);
+      connectionStatus.value = 'error';
+    });
+
 }
 </script>
 
